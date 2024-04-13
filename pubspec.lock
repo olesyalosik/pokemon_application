@@ -41,6 +41,20 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.17.1"
+  core:
+    dependency: "direct main"
+    description:
+      path: core
+      relative: true
+    source: path
+    version: "0.0.1"
+  core_ui:
+    dependency: "direct main"
+    description:
+      path: core_ui
+      relative: true
+    source: path
+    version: "0.0.1"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -49,6 +63,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.6"
+  data:
+    dependency: "direct main"
+    description:
+      path: data
+      relative: true
+    source: path
+    version: "0.0.1"
   dio:
     dependency: "direct main"
     description:
@@ -57,6 +78,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.4.2+1"
+  domain:
+    dependency: "direct main"
+    description:
+      path: domain
+      relative: true
+    source: path
+    version: "0.0.1"
   fake_async:
     dependency: transitive
     description:
@@ -210,3 +238,4 @@ packages:
     version: "2.1.4"
 sdks:
   dart: ">=3.0.6 <4.0.0"
+  flutter: ">=1.17.0"
