@@ -1,3 +1,9 @@
+import 'package:data/data.dart';
+
 abstract class PokemonRepository {
-  Future<List<PokemonModel>> getPokemonList();
+  const PokemonRepository();
+
+  Future<PokemonList> getPokemonList(String url);
+
+  Future<PokemonDetails> getPokemonDetails(String url);
 }
