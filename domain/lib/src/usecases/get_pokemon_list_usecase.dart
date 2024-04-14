@@ -1,7 +1,6 @@
-import 'package:data/data.dart';
 import 'package:domain/domain.dart';
 
-class GetPokemonListUseCase extends FutureUsecase<PokemonList, String> {
+class GetPokemonListUseCase extends FutureUseCase<String, PokemonListModel> {
   final PokemonRepository _pokemonRepository;
 
   GetPokemonListUseCase({
@@ -9,7 +8,7 @@ class GetPokemonListUseCase extends FutureUsecase<PokemonList, String> {
   }) : _pokemonRepository = pokemonRepository;
 
   @override
-  Future<PokemonList> execute(String params) async {
+  Future<PokemonListModel> execute(String params) async {
     return _pokemonRepository.getPokemonList(params);
   }
 }

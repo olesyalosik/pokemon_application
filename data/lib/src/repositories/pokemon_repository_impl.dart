@@ -10,12 +10,15 @@ class PokemonRepositoryImpl extends PokemonRepository {
   });
 
   @override
-  Future<PokemonDetails> getPokemonDetails(String url) {
-    return apiProvider.getPokemonDetails(url);
+  Future<PokemonDetailsModel> getPokemonDetails(String url) async {
+    final PokemonDetails pokemonDetails =
+        await apiProvider.getPokemonDetails(url);
+    return PokemonDetailsMapper.mapEntityToModel(pokemonDetails);
   }
 
   @override
-  Future<PokemonList> getPokemonList(String url) {
-    return apiProvider.getPokemonList(url);
+  Future<PokemonListModel> getPokemonList(String url) async {
+    final PokemonList pokemonList = await apiProvider.getPokemonList(url);
+    return PokemonListMapper.mapEntityToModel(pokemonList);
   }
 }

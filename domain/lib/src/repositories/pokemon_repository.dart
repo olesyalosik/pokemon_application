@@ -1,9 +1,9 @@
-import 'package:data/data.dart';
+import 'package:domain/domain.dart';
 
 abstract class PokemonRepository {
   const PokemonRepository();
 
-  Future<PokemonList> getPokemonList(String url);
+  Future<PokemonListModel> getPokemonList(String url);
 
-  Future<PokemonDetails> getPokemonDetails(String url);
+  Future<PokemonDetailsModel> getPokemonDetails(String url);
 }
