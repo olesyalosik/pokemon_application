@@ -1,0 +1,39 @@
+import 'package:core/core.dart';
+import 'package:domain/domain.dart';
+
+import 'home_state.dart';
+import 'home_event.dart';
+
+export 'home_state.dart';
+export 'home_event.dart';
+
+class HomeBloc extends Bloc<HomeEvent, HomeState> {
+  final GetPokemonListUseCase _getPokemonListUseCase;
+  final InitPokemonListUseCase _initPokemonListUseCase;
+
+  HomeBloc({
+    required GetPokemonListUseCase getPokemonListUseCase,
+    required InitPokemonListUseCase initPokemonListUseCase,
+  })  : _getPokemonListUseCase = getPokemonListUseCase,
+        _initPokemonListUseCase = initPokemonListUseCase,
+        super(HomeState()) {
+    on<InitEvent>(_onInitEvent);
+
+    add(InitEvent());
+  }
+
+  Future<void> _onInitEvent(
+    InitEvent event,
+    Emitter<HomeState> emit,
+  ) async {
+    try {
+      await _initPokemonListUseCase.execute(NoParams());
+    } catch (_) {
+      emit(HomeStateError(URL: 'https://pokeapi.co/api/v2/pokemon'));
+      return;
+    }
+    emit(HomeStateSuccess(
+      pokemons: await _initPokemonListUseCase.execute(NoParams()),
+    ));
+  }
+}
