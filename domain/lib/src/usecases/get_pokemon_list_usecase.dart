@@ -9,6 +9,6 @@ class GetPokemonListUseCase extends FutureUseCase<String, PokemonListModel> {
 
   @override
   Future<PokemonListModel> execute(String params) async {
-    return _pokemonRepository.getPokemonList(params);
+    return await _pokemonRepository.getPokemonList(params);
   }
 }

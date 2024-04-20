@@ -6,4 +6,6 @@ abstract class PokemonRepository {
   Future<PokemonListModel> getPokemonList(String url);
 
   Future<PokemonDetailsModel> getPokemonDetails(String url);
+
+  Future<PokemonListModel> initPokemonList();
 }

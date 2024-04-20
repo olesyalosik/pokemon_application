@@ -21,7 +21,9 @@ dependencies:
     path: ./data
   domain:
     path: ./domain
-    
+  home:
+    path: ./features/home
+
 
 dev_dependencies:
   flutter_test:

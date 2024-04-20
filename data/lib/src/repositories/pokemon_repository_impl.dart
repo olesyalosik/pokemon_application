@@ -21,4 +21,10 @@ class PokemonRepositoryImpl extends PokemonRepository {
     final PokemonList pokemonList = await apiProvider.getPokemonList(url);
     return PokemonListMapper.mapEntityToModel(pokemonList);
   }
+
+  @override
+  Future<PokemonListModel> initPokemonList() async {
+    final PokemonList pokemonList = await apiProvider.initPokemonList();
+    return PokemonListMapper.mapEntityToModel(pokemonList);
+  }
 }

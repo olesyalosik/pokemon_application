@@ -13,6 +13,9 @@ dependencies:
   dio: ^5.4.2
   domain:
     path: ../domain
+  core:
+    path: ../core
+  hive: ^2.2.3
 
 dev_dependencies:
   flutter_test:

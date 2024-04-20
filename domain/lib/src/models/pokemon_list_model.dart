@@ -15,7 +15,9 @@ class PokemonListModel extends Equatable {
   });
 
   @override
-  List<Object> get props => <Object>[
+  List<Object?> get props => <Object?>[
+        next,
+        previous,
         count,
         results,
       ];
