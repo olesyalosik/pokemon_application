@@ -2,6 +2,7 @@ import 'package:core/core.dart';
 import 'package:data/data.dart';
 import 'package:data/src/providers/api_provider.dart';
 import 'package:domain/domain.dart';
+import 'package:hive/hive.dart';
 
 final DataDI dataDI = DataDI();
 
@@ -32,5 +33,10 @@ class DataDI {
         .registerFactory<InitPokemonListUseCase>(() => InitPokemonListUseCase(
               pokemonRepository: appLocator.get<PokemonRepository>(),
             ));
+  }
+
+  Future<void> initHive() async {
+    await Hive.openBox('listBox');
+    await Hive.openBox('detailsBox');
   }
 }

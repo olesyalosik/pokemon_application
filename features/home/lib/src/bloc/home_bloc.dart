@@ -18,8 +18,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         _initPokemonListUseCase = initPokemonListUseCase,
         super(HomeState()) {
     on<InitEvent>(_onInitEvent);
-
-    add(InitEvent());
+    on<OpenPageEvent>(_onOpenPage);
   }
 
   Future<void> _onInitEvent(
@@ -34,6 +33,18 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     }
     emit(HomeStateSuccess(
       pokemons: await _initPokemonListUseCase.execute(NoParams()),
+    ));
+  }
+
+  Future<void> _onOpenPage(OpenPageEvent event, Emitter<HomeState> emit) async {
+    try {
+      await _getPokemonListUseCase.execute(event.url);
+    } catch (_) {
+      emit(HomeStateError(URL: event.url));
+      return;
+    }
+    emit(HomeStateSuccess(
+      pokemons: await _getPokemonListUseCase.execute(event.url),
     ));
   }
 }

@@ -7,3 +7,4 @@ export 'src/entities/pokemon_list.dart';
 export 'src/mappers/mappers.dart';
 export 'src/repositories/pokemon_repository_impl.dart';
 export 'src/di/data_di.dart';
+export 'src/providers/api_provider.dart';

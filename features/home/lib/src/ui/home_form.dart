@@ -1,7 +1,8 @@
+import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:home/src/bloc/home_bloc.dart';
-import 'package:core/core.dart';
 
 class HomeForm extends StatefulWidget {
   const HomeForm({super.key});
@@ -15,38 +16,39 @@ class _HomeFormState extends State<HomeForm> {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(
         builder: (BuildContext context, HomeState state) {
-      if (state is HomeStateSuccess) {
-        return SafeArea(
-          child: Scaffold(
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            appBar: AppBar(
-              centerTitle: true,
-              iconTheme: Theme.of(context).iconTheme,
-              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-              title: Text(
-                AppTitles.nameOfApp,
-                style: Theme.of(context).appBarTheme.titleTextStyle,
-              ),
-            ),
-            body: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10.0,
-                vertical: 20.0,
-              ),
-              child: GridView.count(
-                crossAxisCount: 1,
-                children: List<Widget>.generate(
-                    state.pokemons.results.length,
-                    (index) => ListItem(
-                          name: state.pokemons.results[index].name,
-                        )),
-              ),
+      if (state is HomeStateError) {
+        return Scaffold(
+          body: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(AppTitles.networkError),
+              ],
             ),
           ),
         );
-      } else {
+      } else if (state is HomeStateSuccess) {
         return Scaffold(
-          backgroundColor: AppColors.primaryColor,
+          body: ScrollConfiguration(
+            behavior: const ScrollBehavior().copyWith(overscroll: false),
+            child: ListView.separated(
+                itemBuilder: (BuildContext context, int index) {
+                  return ListItem(
+                    name: state.pokemons.results[index].name,
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) =>
+                    const Divider(),
+                itemCount: state.pokemons.results.length),
+          ),
+        );
+      } else {
+        return const Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(
+              color: AppColors.primaryColor,
+            ),
+          ),
         );
       }
     });
