@@ -21,11 +21,108 @@ class _HomeFormState extends State<HomeForm> {
       if (state is HomeStateError) {
         return Scaffold(
           body: Center(
-            child: Text(AppTitles.networkError),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text(
+                    AppTitles.networkError,
+                    style: TextStyles.comfortaa_bold_24,
+                  ),
+                ),
+                InkWell(
+                  onTap: () => BlocProvider.of<HomeBloc>(context).add(
+                    OpenPageEvent(url: state.URL),
+                  ),
+                  child: Icon(
+                    size: 50.0,
+                    color: AppColors.primaryColor,
+                    Icons.restart_alt_sharp,
+                  ),
+                )
+              ],
+            ),
           ),
         );
       } else if (state is HomeStateSuccess) {
         return Scaffold(
+          bottomNavigationBar: Container(
+            height: 70.0,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(30.0),
+                topLeft: Radius.circular(30.0),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black38,
+                  spreadRadius: 0,
+                  blurRadius: 10,
+                ),
+              ],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(30.0),
+                topRight: Radius.circular(30.0),
+              ),
+              child: BottomNavigationBar(
+                selectedItemColor: AppColors.primaryColor,
+                unselectedItemColor: AppColors.cardColor,
+                items: <BottomNavigationBarItem>[
+                  state.pokemons.previous != null
+                      ? const BottomNavigationBarItem(
+                          icon: Icon(
+                            Icons.arrow_back_ios_rounded,
+                          ),
+                          label: 'previous',
+                        )
+                      : const BottomNavigationBarItem(
+                          icon: Icon(
+                            Icons.arrow_back_ios_rounded,
+                            color: AppColors.textColor,
+                          ),
+                          label: 'previous',
+                        ),
+                  state.pokemons.next != null
+                      ? const BottomNavigationBarItem(
+                          icon: Icon(Icons.arrow_forward_ios_rounded),
+                          label: 'next',
+                        )
+                      : const BottomNavigationBarItem(
+                          icon: Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: AppColors.textColor,
+                          ),
+                          label: 'next',
+                        ),
+                ],
+                onTap: (int index) {
+                  if (index == 0 && state.pokemons.previous != null) {
+                    BlocProvider.of<HomeBloc>(context)
+                        .add(OpenPageEvent(url: state.pokemons.previous!));
+                  } else if (index == 0) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('There is no previous page'),
+                      ),
+                    );
+                  }
+                  if (index == 1 && state.pokemons.next != null) {
+                    BlocProvider.of<HomeBloc>(context)
+                        .add(OpenPageEvent(url: state.pokemons.next!));
+                  } else if (index == 1) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('There is no next page'),
+                      ),
+                    );
+                  }
+                },
+              ),
+            ),
+          ),
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(30),
             child: Container(
@@ -40,10 +137,12 @@ class _HomeFormState extends State<HomeForm> {
                 ],
               ),
               child: AppBar(
+                automaticallyImplyLeading: false,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(
-                  bottom: Radius.circular(15.0),
-                )),
+                  borderRadius: BorderRadius.vertical(
+                    bottom: Radius.circular(15.0),
+                  ),
+                ),
                 backgroundColor: AppColors.primaryColor,
                 title: Text(
                   AppTitles.nameOfApp,
