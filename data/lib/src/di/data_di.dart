@@ -8,11 +8,13 @@ final DataDI dataDI = DataDI();
 
 class DataDI {
   void initDependencies() {
-    appLocator.registerSingleton<ApiProvider>(
-      ApiProvider(dioClient: appLocator.get<Client>()),
-    );
     appLocator.registerSingleton<Client>(
       Client(),
+    );
+    appLocator.registerSingleton<ApiProvider>(
+      ApiProvider(
+        dioClient: appLocator.get<Client>(),
+      ),
     );
     appLocator.registerLazySingleton<PokemonRepository>(
       () => PokemonRepositoryImpl(
@@ -29,10 +31,11 @@ class DataDI {
         pokemonRepository: appLocator.get<PokemonRepository>(),
       ),
     );
-    appLocator
-        .registerFactory<InitPokemonListUseCase>(() => InitPokemonListUseCase(
-              pokemonRepository: appLocator.get<PokemonRepository>(),
-            ));
+    appLocator.registerFactory<InitPokemonListUseCase>(
+      () => InitPokemonListUseCase(
+        pokemonRepository: appLocator.get<PokemonRepository>(),
+      ),
+    );
   }
 
   Future<void> initHive() async {

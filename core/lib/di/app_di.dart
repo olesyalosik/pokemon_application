@@ -7,10 +7,10 @@ final AppDI appDI = AppDI();
 
 class AppDI {
   void initDependencies() {
-    // _initAppRouter();
+    _initAppRouter();
   }
 }
 
-// void _initAppRouter() {
-//   appLocator.registerSingleton<AppRouter>(AppRouter());
-// }
+void _initAppRouter() {
+  appLocator.registerSingleton<AppRouter>(AppRouter());
+}

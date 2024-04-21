@@ -23,11 +23,16 @@ dependencies:
     path: ./domain
   home:
     path: ./features/home
+  detailed_view:
+    path: ./features/detailed_view
+  navigation:
+    path: ./navigation
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
 
   flutter_lints: ^2.0.0
 
