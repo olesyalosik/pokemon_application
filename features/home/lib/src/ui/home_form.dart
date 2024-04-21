@@ -166,8 +166,9 @@ class _HomeFormState extends State<HomeForm> {
                     ),
                   );
                 },
-                separatorBuilder: (BuildContext context, int index) =>
-                    const Divider(),
+                separatorBuilder: (BuildContext context, int index) => SizedBox(
+                      width: 10.0,
+                    ),
                 itemCount: state.pokemons.results.length),
           ),
         );

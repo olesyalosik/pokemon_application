@@ -60,66 +60,72 @@ class _DetailedViewFormState extends State<DetailedViewForm> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  CachedNetworkImage(
-                    imageUrl: state.pokemonDetailsModel.imageURL,
-                    imageBuilder:
-                        (BuildContext context, ImageProvider imageProvider) =>
-                            Container(
-                      height: 300.0,
-                      width: 300.0,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                            color: AppColors.primaryColor, width: 3.0),
-                        borderRadius: BorderRadius.circular(15.0),
-                        image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: CachedNetworkImage(
+                      imageUrl: state.pokemonDetailsModel.imageURL,
+                      imageBuilder:
+                          (BuildContext context, ImageProvider imageProvider) =>
+                              Container(
+                        height: 300.0,
+                        width: 300.0,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              color: AppColors.primaryColor, width: 3.0),
+                          borderRadius: BorderRadius.circular(15.0),
+                          image: DecorationImage(
+                            image: imageProvider,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(10.0),
-                    child: Text(
-                      'Types',
-                      style: TextStyles.comfortaa_bold_16
-                          .copyWith(color: AppColors.textColor),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 50.0,
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      padding: const EdgeInsets.all(5.0),
-                      itemCount: state.pokemonDetailsModel.types.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Padding(
-                          padding: EdgeInsetsDirectional.symmetric(
-                            horizontal: 5.0,
-                          ),
-                          child: Container(
-                            alignment: Alignment.center,
-                            width: 200.0,
-                            height: 50.0,
-                            decoration: BoxDecoration(
-                              color: AppColors.cardColor,
-                              borderRadius: BorderRadius.circular(20.0),
-                              border: Border.all(
-                                color: AppColors.primaryColor,
-                                width: 2.0,
+                    child: SizedBox(
+                      height: 50.0,
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        padding: const EdgeInsets.all(5.0),
+                        itemCount: state.pokemonDetailsModel.types.length + 1,
+                        itemBuilder: (BuildContext context, int index) {
+                          if (index == 0) {
+                            return Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Text(
+                                'Types: ',
+                                style: TextStyles.comfortaa_bold_16
+                                    .copyWith(color: AppColors.textColor),
                               ),
-                            ),
-                            child: Text(
-                              '${state.pokemonDetailsModel.types[index]}',
-                              style: TextStyles.comfortaa_bold_14.copyWith(
-                                color: AppColors.textColor,
+                            );
+                          } else {
+                            return Container(
+                              alignment: Alignment.center,
+                              width: 200.0,
+                              height: 50.0,
+                              decoration: BoxDecoration(
+                                color: AppColors.cardColor,
+                                borderRadius: BorderRadius.circular(20.0),
+                                border: Border.all(
+                                  color: AppColors.primaryColor,
+                                  width: 2.0,
+                                ),
                               ),
-                            ),
-                          ),
-                        );
-                      },
-                      separatorBuilder: (BuildContext context, int index) =>
-                          const Divider(),
+                              child: Text(
+                                '${state.pokemonDetailsModel.types[index - 1]}',
+                                style: TextStyles.comfortaa_bold_14.copyWith(
+                                  color: AppColors.textColor,
+                                ),
+                              ),
+                            );
+                          }
+                        },
+                        separatorBuilder: (BuildContext context, int index) =>
+                            SizedBox(
+                          width: 10.0,
+                        ),
+                      ),
                     ),
                   ),
                   Padding(
@@ -129,7 +135,7 @@ class _DetailedViewFormState extends State<DetailedViewForm> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
-                          'Weight',
+                          'Weight:',
                           style: TextStyles.comfortaa_bold_16
                               .copyWith(color: AppColors.textColor),
                         ),
