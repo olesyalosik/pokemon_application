@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:home/src/bloc/home_bloc.dart';
 import 'package:detailed_view/detailed_view.dart';
+import 'package:navigation/navigation.dart';
 
 class HomeForm extends StatefulWidget {
   const HomeForm({super.key});
@@ -59,7 +60,7 @@ class _HomeFormState extends State<HomeForm> {
             child: ListView.separated(
                 itemBuilder: (BuildContext context, int index) {
                   return InkWell(
-                    onTap: () => context.navigateTo(DetailedViewRoute(
+                    onTap: () => appLocator<AppRouter>().push(DetailedViewRoute(
                         url: state.pokemons.results[index].url)),
                     child: ListItem(
                       name: state.pokemons.results[index].name,

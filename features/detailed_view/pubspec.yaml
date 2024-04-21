@@ -19,6 +19,8 @@ dependencies:
   cached_network_image: ^3.0.0
   navigation:
     path: ../../navigation
+  home:
+    path: ../home
 
 dev_dependencies:
   flutter_test:

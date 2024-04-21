@@ -3,6 +3,8 @@ import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:detailed_view/src/bloc/detailed_view_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:navigation/navigation.dart';
+import 'package:home/home.dart';
 
 class DetailedViewForm extends StatefulWidget {
   const DetailedViewForm({super.key});
@@ -32,6 +34,12 @@ class _DetailedViewFormState extends State<DetailedViewForm> {
                 ],
               ),
               child: AppBar(
+                leading: InkWell(
+                  onTap: () => appLocator<AppRouter>().push(HomeRoute()),
+                  child: Icon(
+                    Icons.arrow_back_ios_rounded,
+                  ),
+                ),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.vertical(
                   bottom: Radius.circular(15.0),
@@ -49,15 +57,20 @@ class _DetailedViewFormState extends State<DetailedViewForm> {
           ),
           body: Center(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 CachedNetworkImage(
                   imageUrl: state.pokemonDetailsModel.imageURL,
                   imageBuilder:
                       (BuildContext context, ImageProvider imageProvider) =>
                           Container(
-                    height: 250.0,
-                    width: 250.0,
+                    height: 300.0,
+                    width: 300.0,
                     decoration: BoxDecoration(
+                      border:
+                          Border.all(color: AppColors.primaryColor, width: 3.0),
+                      borderRadius: BorderRadius.circular(15.0),
                       image: DecorationImage(
                         image: imageProvider,
                         fit: BoxFit.cover,
@@ -65,10 +78,13 @@ class _DetailedViewFormState extends State<DetailedViewForm> {
                     ),
                   ),
                 ),
-                Text(
-                  'Types',
-                  style: TextStyles.comfortaa_light_16
-                      .copyWith(color: AppColors.textColor),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text(
+                    'Types',
+                    style: TextStyles.comfortaa_bold_16
+                        .copyWith(color: AppColors.textColor),
+                  ),
                 ),
                 SizedBox(
                   height: 50.0,
@@ -106,16 +122,82 @@ class _DetailedViewFormState extends State<DetailedViewForm> {
                         const Divider(),
                   ),
                 ),
-                Text(
-                  'Weight: ${state.pokemonDetailsModel.weight}',
-                  style: TextStyles.comfortaa_light_16
-                      .copyWith(color: AppColors.textColor),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        'Weight',
+                        style: TextStyles.comfortaa_bold_16
+                            .copyWith(color: AppColors.textColor),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.symmetric(
+                          horizontal: 5.0,
+                        ),
+                        child: Container(
+                          alignment: Alignment.center,
+                          width: 200.0,
+                          height: 40.0,
+                          decoration: BoxDecoration(
+                            color: AppColors.cardColor,
+                            borderRadius: BorderRadius.circular(20.0),
+                            border: Border.all(
+                              color: AppColors.primaryColor,
+                              width: 2.0,
+                            ),
+                          ),
+                          child: Text(
+                            '${state.pokemonDetailsModel.weight} kg',
+                            style: TextStyles.comfortaa_bold_14.copyWith(
+                              color: AppColors.textColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                Text(
-                  'Height: ${state.pokemonDetailsModel.height}',
-                  style: TextStyles.comfortaa_light_16
-                      .copyWith(color: AppColors.textColor),
-                ),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        'Height:',
+                        style: TextStyles.comfortaa_bold_16
+                            .copyWith(color: AppColors.textColor),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.symmetric(
+                          horizontal: 5.0,
+                        ),
+                        child: Container(
+                          alignment: Alignment.center,
+                          width: 200.0,
+                          height: 40.0,
+                          decoration: BoxDecoration(
+                            color: AppColors.cardColor,
+                            borderRadius: BorderRadius.circular(20.0),
+                            border: Border.all(
+                              color: AppColors.primaryColor,
+                              width: 2.0,
+                            ),
+                          ),
+                          child: Text(
+                            '${state.pokemonDetailsModel.height} cm',
+                            style: TextStyles.comfortaa_bold_14.copyWith(
+                              color: AppColors.textColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
               ],
             ),
           ),
