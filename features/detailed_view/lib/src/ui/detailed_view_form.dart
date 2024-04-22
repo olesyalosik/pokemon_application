@@ -21,7 +21,9 @@ class _DetailedViewFormState extends State<DetailedViewForm> {
         if (state is DetailedViewStateSuccess) {
           return Scaffold(
             appBar: PreferredSize(
-              preferredSize: Size.fromHeight(30),
+              preferredSize: Size.fromHeight(
+                Dimension.appBarWidth,
+              ),
               child: Container(
                 decoration: BoxDecoration(
                   boxShadow: [
@@ -42,7 +44,7 @@ class _DetailedViewFormState extends State<DetailedViewForm> {
                   ),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.vertical(
-                    bottom: Radius.circular(15.0),
+                    bottom: Radius.circular(Dimension.borderRadius),
                   )),
                   backgroundColor: AppColors.primaryColor,
                   title: Text(
@@ -61,18 +63,20 @@ class _DetailedViewFormState extends State<DetailedViewForm> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(Dimension.padding),
                     child: CachedNetworkImage(
                       imageUrl: state.pokemonDetailsModel.imageURL,
                       imageBuilder:
                           (BuildContext context, ImageProvider imageProvider) =>
                               Container(
-                        height: 300.0,
-                        width: 300.0,
+                        height: Dimension.pictureSize,
+                        width: Dimension.pictureSize,
                         decoration: BoxDecoration(
                           border: Border.all(
-                              color: AppColors.primaryColor, width: 3.0),
-                          borderRadius: BorderRadius.circular(15.0),
+                              color: AppColors.primaryColor,
+                              width: Dimension.borderWidth),
+                          borderRadius:
+                              BorderRadius.circular(Dimension.borderRadius),
                           image: DecorationImage(
                             image: imageProvider,
                             fit: BoxFit.cover,
@@ -82,17 +86,23 @@ class _DetailedViewFormState extends State<DetailedViewForm> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(
+                      Dimension.padding,
+                    ),
                     child: SizedBox(
-                      height: 50.0,
+                      height: Dimension.typesHeight,
                       child: ListView.separated(
                         scrollDirection: Axis.horizontal,
-                        padding: const EdgeInsets.all(5.0),
+                        padding: const EdgeInsets.all(
+                          Dimension.smallPadding,
+                        ),
                         itemCount: state.pokemonDetailsModel.types.length + 1,
                         itemBuilder: (BuildContext context, int index) {
                           if (index == 0) {
                             return Padding(
-                              padding: const EdgeInsets.all(10.0),
+                              padding: const EdgeInsets.all(
+                                Dimension.padding,
+                              ),
                               child: Text(
                                 'Types: ',
                                 style: TextStyles.comfortaa_bold_16
@@ -102,14 +112,16 @@ class _DetailedViewFormState extends State<DetailedViewForm> {
                           } else {
                             return Container(
                               alignment: Alignment.center,
-                              width: 200.0,
-                              height: 50.0,
+                              width: Dimension.containerHeight,
+                              height: Dimension.itemHeight,
                               decoration: BoxDecoration(
                                 color: AppColors.cardColor,
-                                borderRadius: BorderRadius.circular(20.0),
+                                borderRadius: BorderRadius.circular(
+                                  Dimension.charBorderRadius,
+                                ),
                                 border: Border.all(
                                   color: AppColors.primaryColor,
-                                  width: 2.0,
+                                  width: Dimension.borderWidth,
                                 ),
                               ),
                               child: Text(
@@ -123,13 +135,15 @@ class _DetailedViewFormState extends State<DetailedViewForm> {
                         },
                         separatorBuilder: (BuildContext context, int index) =>
                             SizedBox(
-                          width: 10.0,
+                          width: Dimension.divider,
                         ),
                       ),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(
+                      Dimension.padding,
+                    ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -141,18 +155,19 @@ class _DetailedViewFormState extends State<DetailedViewForm> {
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.symmetric(
-                            horizontal: 5.0,
+                            horizontal: Dimension.smallPadding,
                           ),
                           child: Container(
                             alignment: Alignment.center,
-                            width: 200.0,
-                            height: 40.0,
+                            width: Dimension.containerHeight,
+                            height: Dimension.itemHeight,
                             decoration: BoxDecoration(
                               color: AppColors.cardColor,
-                              borderRadius: BorderRadius.circular(20.0),
+                              borderRadius: BorderRadius.circular(
+                                  Dimension.charBorderRadius),
                               border: Border.all(
                                 color: AppColors.primaryColor,
-                                width: 2.0,
+                                width: Dimension.borderWidth,
                               ),
                             ),
                             child: Text(
@@ -167,30 +182,35 @@ class _DetailedViewFormState extends State<DetailedViewForm> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(
+                      Dimension.padding,
+                    ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
                           'Height:',
-                          style: TextStyles.comfortaa_bold_16
-                              .copyWith(color: AppColors.textColor),
+                          style: TextStyles.comfortaa_bold_16.copyWith(
+                            color: AppColors.textColor,
+                          ),
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.symmetric(
-                            horizontal: 5.0,
+                            horizontal: Dimension.smallPadding,
                           ),
                           child: Container(
                             alignment: Alignment.center,
-                            width: 200.0,
-                            height: 40.0,
+                            width: Dimension.containerHeight,
+                            height: Dimension.itemHeight,
                             decoration: BoxDecoration(
                               color: AppColors.cardColor,
-                              borderRadius: BorderRadius.circular(20.0),
+                              borderRadius: BorderRadius.circular(
+                                Dimension.charBorderRadius,
+                              ),
                               border: Border.all(
                                 color: AppColors.primaryColor,
-                                width: 2.0,
+                                width: Dimension.borderWidth,
                               ),
                             ),
                             child: Text(
@@ -216,7 +236,7 @@ class _DetailedViewFormState extends State<DetailedViewForm> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Padding(
-                          padding: EdgeInsets.all(10.0),
+                          padding: EdgeInsets.all(Dimension.padding),
                           child: Text(
                             AppTitles.networkError,
                             style: TextStyles.comfortaa_bold_24,
@@ -230,7 +250,7 @@ class _DetailedViewFormState extends State<DetailedViewForm> {
                           child: const Icon(
                             Icons.restart_alt_rounded,
                             color: AppColors.primaryColor,
-                            size: 50.0,
+                            size: Dimension.iconSize,
                           ),
                         ),
                       ],

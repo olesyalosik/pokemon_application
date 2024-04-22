@@ -51,8 +51,8 @@ class _HomeFormState extends State<HomeForm> {
             height: 70.0,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
-                topRight: Radius.circular(30.0),
-                topLeft: Radius.circular(30.0),
+                topRight: Radius.circular(Dimension.barBorderRadius),
+                topLeft: Radius.circular(Dimension.barBorderRadius),
               ),
               boxShadow: [
                 BoxShadow(
@@ -64,8 +64,8 @@ class _HomeFormState extends State<HomeForm> {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(30.0),
-                topRight: Radius.circular(30.0),
+                topLeft: Radius.circular(Dimension.barBorderRadius),
+                topRight: Radius.circular(Dimension.barBorderRadius),
               ),
               child: BottomNavigationBar(
                 selectedItemColor: AppColors.primaryColor,
@@ -124,7 +124,9 @@ class _HomeFormState extends State<HomeForm> {
             ),
           ),
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(30),
+            preferredSize: Size.fromHeight(
+              Dimension.appBarWidth,
+            ),
             child: Container(
               decoration: BoxDecoration(
                 boxShadow: [
@@ -140,7 +142,9 @@ class _HomeFormState extends State<HomeForm> {
                 automaticallyImplyLeading: false,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.vertical(
-                    bottom: Radius.circular(15.0),
+                    bottom: Radius.circular(
+                      Dimension.borderRadius,
+                    ),
                   ),
                 ),
                 backgroundColor: AppColors.primaryColor,
@@ -167,7 +171,7 @@ class _HomeFormState extends State<HomeForm> {
                   );
                 },
                 separatorBuilder: (BuildContext context, int index) => SizedBox(
-                      width: 10.0,
+                      width: Dimension.divider,
                     ),
                 itemCount: state.pokemons.results.length),
           ),
